@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Hijo Pródigo — Centro de Rehabilitación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* ===== ENCABEZADO ===== */
+        header {
+            background: linear-gradient(135deg, #0F3460, #1A5F7A);
+            padding: 0.8rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 55px;
+            width: auto;
+            border-radius: 8px;
+            background: white;
+            padding: 4px;
+            box-shadow: 0 2px 8px rgba(255,255,255,0.2);
+        }
+        .logo-text {
+            color: white;
+            font-size: 1.35rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .logo-text span { 
+            color: #86EFAC; 
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            color: #86EFAC;
+            border-bottom: 2px solid #86EFAC;
+        }
+
+        /* ===== PORTADA / HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0F3460, #1A5F7A);
+            color: white;
+            padding: 5rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 52, 96, 0.65);
+            z-index: 0;
+        }
+        .hero-fondo-logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('fondo.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hero-contenido {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .hero h1 span {
+            color: #86EFAC;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.75);
+            font-weight: 500;
+        }
+        .contacto-hero {
+            background: rgba(255,255,255,0.12);
+            padding: 1.2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .contacto-hero p {
+            margin: 0.5rem 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+            margin: 0.5rem;
+        }
+        .btn:hover { transform: translateY(-3px); }
+        .btn-primary { 
+            background: linear-gradient(135deg, #22C55E, #16A34A); 
+            color: white;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+        .btn-secondary { 
+            border: none;
+            background: linear-gradient(135deg, #16A34A, #15803D);
+            color: white;
+        }
+
+        /* ===== SECCIONES GENERALES ===== */
+        section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .titulo-seccion {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .titulo-seccion h2 {
+            font-size: 2rem;
+            color: #0F3460;
+            margin-bottom: 0.5rem;
+        }
+        .subrayado {
+            width: 80px;
+            height: 4px;
+            background: #22C55E;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* ===== QUIENES SOMOS ===== */
+        .quienes-somos p {
+            font-size: 1.05rem;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* ===== SERVICIOS ===== */
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .servicio-tarjeta {
+            background: white;
+            border-radius: 12px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border-top: 4px solid #22C55E;
+        }
+        .servicio-tarjeta:hover {
+            transform: translateY(-5px);
+        }
+        .servicio-tarjeta h3 {
+            color: #0F3460;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ===== INSTALACIONES ===== */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .foto-tarjeta {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        .foto-tarjeta:hover {
+            transform: translateY(-5px);
+        }
+        .foto-tarjeta img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f0f4f8;
+        }
+        .foto-tarjeta h4 {
+            padding: 1rem 1rem 0.3rem;
+            color: #0F3460;
+            font-size: 1.1rem;
+        }
+        .foto-tarjeta p {
+            padding: 0 1rem 1rem;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ===== CONTACTO ===== */
+        .contacto-info {
+            background: linear-gradient(135deg, #0F3460, #1A5F7A);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .contacto-info h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+        .contacto-info p {
+            margin: 0.8rem 0;
+            font-size: 1.05rem;
+        }
+        .contacto-info a {
+            color: #86EFAC;
+            text-decoration: none;
+        }
+
+        /* ===== PIE DE PÁGINA ===== */
+        footer {
+            background: #0F3460;
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: #86EFAC;
+            text-decoration: none;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav a {
+                margin: 0 0.75rem;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <a href="#inicio" class="logo-container">
+            <img src="logo.png" alt="El Hijo Pródigo" class="logo-img">
+            <div class="logo-text">El Hijo <span>Pródigo</span></div>
+        </a>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#instalaciones">Instalaciones</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero" id="inicio">
+    <div class="hero-fondo-logo"></div>
+    <div class="hero-contenido">
+        <h1>Hoy puedes ser diferente,<br>
+<span>Mañana puedes ser mejor</span><br>
+<em style="font-size: 1.6rem; font-style: normal;">Empieza hoy con nosotros.</em></h1>
+        <p>Centro Especializado en el Tratamiento y Prevención de las Adicciones en Morelia, Michoacán. Atención integral: emocional, psicológica, psiquiátrica y espiritual.</p>
+        <div class="contacto-hero">
+            <p>📞 <strong>Teléfono:</strong> (443) 863‑4630</p>
+            <p>📍 <strong>Dirección:</strong> Jururemba 521, Colonia San Isidro Itzícuaro, C.P. 58337, Morelia, Michoacán</p>
+        </div>
+        <a href="https://wa.me/524438634630?text=Me%20gustaría%20solicitar%20más%20información%20respecto%20al%20tratamiento%20que%20ofrecen." target="_blank" class="btn btn-primary">📋 Solicitar Información</a>
+        <a href="https://wa.me/524438634630?text=Me%20gustaría%20solicitar%20una%20beca%20de%20apoyo%20para%20poder%20internar%20a%20mi%20familiar." target="_blank" class="btn btn-secondary">🎓 Solicitar Beca</a>
+    </div>
+</section>
+
+<section class="quienes-somos" id="quienes">
+    <div class="titulo-seccion">
+        <h2>Quiénes Somos</h2>
+        <div class="subrayado"></div>
+    </div>
+    <p>Somos una clínica de rehabilitación especializada en el tratamiento y prevención de las adicciones. Manejamos un método multidisciplinario: además del tratamiento de las adicciones, trabajamos el área emocional, psicológica, psiquiátrica y espiritual.</p>
+    <br>
+    <p>Contamos con personal capacitado para brindar un tratamiento digno al paciente. Al ingresar, se le realiza una batería de pruebas de laboratorio para valorar su estado de salud. Se le asigna un psicólogo con sesiones semanales y se mantendrá informando a la familia sobre su avance. También se realiza una valoración psiquiátrica completa.</p>
+</section>
+
+<section id="servicios">
+    <div class="titulo-seccion">
+        <h2>Nuestros Servicios</h2>
+        <div class="subrayado"></div>
+    </div>
+    <div class="servicios-grid">
+        <div class="servicio-tarjeta">
+            <h3>🔬 Evaluación Médica Completa</h3>
+            <p>Batería de pruebas de laboratorio al ingreso para conocer el estado de salud del paciente.</p>
+        </div>
+        <div class="servicio-tarjeta">
+            <h3>🧠 Atención Psicológica</h3>
+            <p>Sesiones individuales semanales con psicólogo asignado. Comunicación con familiares sobre el avance.</p>
+        </div>
+        <div class="servicio-tarjeta">
+            <h3>💊 Valoración Psiquiátrica</h3>
+            <p>Diagnóstico y tratamiento de trastornos asociados al consumo de sustancias.</p>
+        </div>
+        <div class="servicio-tarjeta">
+            <h3>🙏 Apoyo Espiritual</h3>
+            <p>Trabajo integral que incluye el bienestar espiritual como parte fundamental de la recuperación.</p>
+        </div>
+        <div class="servicio-tarjeta">
+            <h3>👨‍👩‍👧‍👦 Terapia Familiar</h3>
+            <p>Involucramiento del entorno familiar en el proceso de recuperación y reinserción.</p>
+        </div>
+        <div class="servicio-tarjeta">
+            <h3>🛏️ Estancia y Convivencia</h3>
+            <p>Ambiente seguro, ordenado y tranquilo diseñado para favorecer tu recuperación.</p>
+        </div>
+    </div>
+</section>
+
+<section id="instalaciones">
+    <div class="titulo-seccion">
+        <h2>Nuestras Instalaciones</h2>
+        <div class="subrayado"></div>
+        <p style="margin-top: 0.5rem;">Espacios diseñados para tu recuperación</p>
+    </div>
+    <div class="galeria-grid">
+        <div class="foto-tarjeta">
+            <img src="comedor.jpg" alt="Comedor">
+            <h4>Comedor</h4>
+            <p>Alimentación balanceada y nutritiva</p>
+        </div>
+        <div class="foto-tarjeta">
+            <img src="dormitorio-1.jpg" alt="Dormitorio">
+            <h4>Dormitorio Principal</h4>
+            <p>Espacios cómodos y seguros para el descanso</p>
+        </div>
+        <div class="foto-tarjeta">
+            <img src="dormitorio-2.jpg" alt="Segundo Dormitorio">
+            <h4>Segundo Dormitorio</h4>
+            <p>Ambientes tranquilos y ordenados</p>
+        </div>
+        <div class="foto-tarjeta">
+            <img src="oficina.jpg" alt="Oficina y Certificaciones">
+            <h4>Oficina y Certificaciones</h4>
+            <p>Espacio administrativo y profesional</p>
+        </div>
+        <div class="foto-tarjeta">
+            <img src="sala.jpg" alt="Sala de Estar">
+            <h4>Sala de Estar</h4>
+            <p>Área de convivencia y esparcimiento</p>
+        </div>
+        <div class="foto-tarjeta">
+            <img src="terapia.jpg" alt="Salón de Terapia">
+            <h4>Salón de Terapias</h4>
+            <p>Espacios amplios para sesiones grupales</p>
+        </div>
+    </div>
+</section>
+
+<section id="contacto">
+    <div class="titulo-seccion">
+        <h2>Contáctanos</h2>
+        <div class="subrayado"></div>
+    </div>
+    <div class="contacto-info">
+        <h3>📍 Centro de Rehabilitación El Hijo Pródigo</h3>
+        <p><strong>Teléfono:</strong> <a href="tel:+524438634630">(443) 863‑4630</a></p>
+        <p><strong>Dirección:</strong> Jururemba 521, Colonia San Isidro Itzícuaro</p>
+        <p><strong>C.P.:</strong> 58337, Morelia, Michoacán</p>
+        <br>
+        <p><a href="aviso-de-privacidad.html">📄 Aviso de Privacidad</a></p>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 El Hijo Pródigo — Centro de Rehabilitación. Todos los derechos reservados.</p>
+    <p style="margin-top: 0.5rem;"><a href="aviso-de-privacidad.html">Aviso de Privacidad</a></p>
+</footer>
+
+</body>
+</html>
